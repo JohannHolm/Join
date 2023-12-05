@@ -1,0 +1,150 @@
+/**SIGN UP DESKTOP START**/
+
+/**ANIMATION FOR THE MAIN CONTENT START**/
+.main-content-animation {
+  animation: fadein 225ms;
+  animation-fill-mode: forwards;
+}
+@keyframes fadein {
+  from {
+    top: -100%;
+    opacity: 0;
+  }
+  to {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+/**ANIMATION FOR THE MAIN CONTENT END**/
+
+.join-logo {
+  width: 100.03px;
+  height: 121.97px;
+  margin-top: 80px;
+  margin-left: 77px;
+  z-index: 100;
+  position: absolute;
+}
+
+.signUp-card {
+  padding: 48px 88px 48px 88px;
+  gap: 16px;
+}
+
+.arrow-left-line {
+  position: absolute;
+  left: 55px;
+  top: 67px;
+  cursor: pointer;
+}
+
+.input-container {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.input-container img {
+  width: 24px;
+  height: 24px;
+  margin-left: 384px;
+  margin-top: 10px;
+  position: absolute;
+}
+
+.input-container input {
+  width: 422px;
+  height: 48px;
+  box-sizing: border-box;
+  border: 1px solid #d1d1d1;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 21px;
+}
+
+.signUp-card a {
+  color: #29abe2;
+  text-decoration: none;
+}
+
+.login-footer-font {
+  color: rgba(168, 168, 168, 1) !important;
+}
+
+.login-footer-font:hover {
+  color: #29abe2 !important;
+}
+
+.login-footer-container {
+  transform: translate(-50%, 40vh) !important;
+}
+
+/**SIGN UP DESKTOP END**/
+
+/**SIGN UP RESPONSIVE START**/
+
+@media (max-width: 1190px) {
+  .join-logo {
+    width: 64px;
+    height: 78.03px;
+    margin-top: 37px;
+    margin-left: 38px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 770px) {
+  .join-logo {
+    width: 64px;
+    height: 78.03px;
+    margin-top: 37px;
+    margin-left: 38px;
+    gap: 10px;
+  }
+
+  .arrow-left-line {
+    left: 19px;
+    top: 50px;
+  }
+
+  .signUp-card {
+    margin-top: 18px;
+    height: 676px;
+    width: 453px;
+  }
+
+  .login-headline {
+    font-size: 47px;
+    margin-top: 32px;
+    width: 180px !important;
+  }
+
+  .input-container input {
+    font-size: 1rem;
+    width: 280px !important;
+  }
+
+  .input-container img {
+    margin-left: 244px;
+  }
+
+  .login-signup-button {
+    margin-top: 20px;
+  }
+  .login-footer-container {
+    transform: translate(-50%, 42vh) !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .signUp-card {
+    margin-top: 18px;
+    height: 576px;
+    width: 100%;
+    gap: 7px;
+  }
+}
+
+/**SIGN UP RESOPOSIVE END**/

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/register.css" />
+  <link rel="stylesheet" href="styles/login.css" />
+  <title>Join | Register</title>
+  <link rel="icon" href="assets/img/join-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="js/register.js"></script>
+</head>
+
+<body onload="init()">
+
+  <a href="index.html">
+    <img class="join-logo" src="assets/img/join-logo.png" alt="">
+  </a>
+  </div>
+
+  <form onsubmit="register(); return false" class="signUp-container">
+    <div class="login-card signUp-card main-content-animation">
+      <h1 class="login-headline login-border-bottom">Sign up</h1>
+      <a href="index.html">
+        <div class="arrow-left-line">
+          <img src="./assets/img/arrow-left-line.png" />
+      </a>
+    </div>
+
+    <div class="input-container">
+      <input id="name" class="form-control" required type="text" placeholder="Name" />
+      <img src="./assets/img/person.png" />
+    </div>
+    <div class="input-container">
+      <input id="email" class="form-control login-form-radius" required type="email" placeholder="Email" />
+      <img src="./assets/img/mail.png" />
+    </div>
+    <div class="input-container">
+      <input onkeyup="checkPasswordValidation()" id="password" class="form-control login-form-radius" required
+        type="password" placeholder="Password" />
+      <img src="./assets/img/login-password.png" />
+    </div>
+    <div class="input-container">
+      <input class="form-control login-form-radius" required type="password" placeholder="Confirm Password"
+        id="confirmPassword" onkeyup="checkPasswordValidation()" />
+      <img src="./assets/img/login-password.png" />
+    </div>
+    <div id="passwordError" style="color: red;"></div>
+
+    <div>
+      <input required type="checkbox" />
+      <span> I accept the </span>
+      <a href="privacy_policy_logout.html">Privacy Policy</a>
+    </div>
+    <a href="index.html"> <button id="registerBtn" type="submit" class="btn login-button login-signup-button"
+        style="cursor: pointer;">Sign
+        Up</button></a>
+  </form>
+
+
+  <footer class="login-footer-container ">
+    <a class="login-privacy-policy-box login-footer-font" href="privacy_policy_logout.html">Privacy Policy</a>
+    <a class="login-privacy-legal-notice login-footer-font" href="legal_notice_logout.html">Legal notice</a>
+  </footer>
+
+</body>
+
+</html>

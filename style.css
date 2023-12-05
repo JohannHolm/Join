@@ -1,0 +1,50 @@
+body {
+  font-family: 'Inter', sans-serif !important;
+  background-color: rgba(246, 247, 248, 1) !important;
+}
+
+/* Heading Imprint and Privacy */
+.imprint-privacy-heading {
+  font-size: 61px;
+}
+
+/**PRIVACY POLICY START **/
+.back-button {
+  object-fit: contain;
+  position: fixed;
+  margin-left: -30px;
+  margin-top: -10px;
+  /*width: 37px;
+  height: 37px;*/
+}
+.back-button:hover {
+  background-color: rgb(228, 228, 228);
+  border-radius: 20px;
+  padding: 1px;
+}
+
+.privacy-policy-headline-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/**PRIVACY POLICY END **/
+
+/**HELP START**/
+.main-content-animation {
+  animation: fadein 225ms;
+  animation-fill-mode: forwards;
+}
+@keyframes fadein {
+  from {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/**HELP END**/
