@@ -34,9 +34,9 @@ function renderContactCons(uniqeLetters) {
   for (let i = 0; i < uniqeLetters.length; i++) {
     contactList.innerHTML += `        
     <div class="contact-list-letter-con">
-      <div class="contact-list-letter">${uniqeLetters[i]}</div>
+      <div class="contact-list-letter">${escapeHTML(uniqeLetters[i])}</div>
     </div>
-    <div id='contact-${uniqeLetters[i]}'></div>`;
+      <div id='contact-${escapeHTML(uniqeLetters[i])}'></div>`;
   }
 }
 
@@ -58,16 +58,15 @@ function renderContacts(contacts) {
  * @returns
  */
 function innerContacts(contact) {
+  const id = getSafeNumericId(contact.id);
   return `
-      <div class="sidebar-contacts" onclick="openContact(${contact.id})" id="contact${contact.id}">
+      <div class="sidebar-contacts" onclick="openContact(${id})" id="contact${id}">
         <div>
-          <div class="contacts-small-profile" style="background-color: ${
-            contact.color
-          }">${getInitials(contact.name)}</div>
+          <div class="contacts-small-profile" style="background-color: ${getSafeContactColor(contact.color)}">${escapeHTML(getInitials(contact.name))}</div>
         </div>
         <div>
-          <h2>${contact.name}</h2>
-          <h3>${contact.email}</h3>
+          <h2>${escapeHTML(contact.name)}</h2>
+          <h3>${escapeHTML(contact.email)}</h3>
         </div>
       </div>`;
 }
@@ -181,19 +180,18 @@ async function getContactInfo(id) {
  * @returns - The HTML Code
  */
 function showContactHTML(contact) {
+  const id = getSafeNumericId(contact.id);
   return `
   <div class="contact-show-head">
-    <div class="contact-profile-container" id="contact-profile-container-info" style="background-color: ${
-      contact.color
-    }">${getInitials(contact.name)}</div>
+    <div class="contact-profile-container" id="contact-profile-container-info" style="background-color: ${getSafeContactColor(contact.color)}">${escapeHTML(getInitials(contact.name))}</div>
     <div class="contact-show-btn-name-container">
-      <div class="contact-show-name">${contact.name}</div>
+      <div class="contact-show-name">${escapeHTML(contact.name)}</div>
       <div class="show-btn-conatiner">
         <div class="contact-show-btn" onclick="editContact(${
-          contact.id
+          id
         })"><img src="./assets/img/editpopup.png" alt="edit">Edit</div>
         <div class="contact-show-btn" onclick="deleteContact(${
-          contact.id
+          id
         })"><img src="./assets/img/deletepopup.png" alt="delte">Delete</div>
       </div>
     </div>
@@ -202,11 +200,11 @@ function showContactHTML(contact) {
     <div class="contact-show-info-text">Contact Information</div>
     <div class="contact-show-email">
       <div class="show-heading">Email</div>
-      <div class="show-email-text">${contact.email}</div>
+      <div class="show-email-text">${escapeHTML(contact.email)}</div>
     </div>
     <div class="contact-show-phone">
       <div class="show-heading">Phone</div>
-      <div class="show-phone-text">${checkNumber(contact.number)}</div>
+      <div class="show-phone-text">${escapeHTML(checkNumber(contact.number))}</div>
     </div>
   </div>
   `;

@@ -1,15 +1,4 @@
 /**
- * The token used for accessing the remote storage.
- * @constant {string}
- */
-const STORAGE_TOKEN = "0BPXH9KOB3KK14LPEUWH02NBW7QT7YIO3LQDS7R4";
-/**
- * The URL used for accessing the remote storage API
- * @constant {String}
- */
-const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
-
-/**
  * Global Variables for the different task counters
  *
  */
@@ -23,7 +12,6 @@ let todo;
 let tasksInBoard;
 let tasksInProgress;
 let tasksInAwaitingFeedback;
-let users = [];
 let today = new Date();
 let hour = today.getHours();
 
@@ -32,7 +20,7 @@ let hour = today.getHours();
  */
 
 async function initSummary() {
-  await getAllTasks("tasks");
+  tasks = await getItem("tasks");
   await setTaskCounters();
   await getUserNameForGreeting();
   setUserInitials();
@@ -40,18 +28,6 @@ async function initSummary() {
 }
 
 /**
- * Fetches tasks data from the server.
- *
- * @param {string} key - The key for the data to fetch.
- */
-
-async function getAllTasks(key) {
-  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-  const response = await fetch(url);
-  let json = await response.json();
-  tasks = JSON.parse(json.data.value);
-}
-
 /**
  * Sets counters for different task categories.
  */
@@ -77,7 +53,7 @@ function setTodo() {
     }
   }
 
-  document.getElementById("tasks-todo").innerHTML = `${todo}`;
+  document.getElementById("tasks-todo").textContent = `${todo}`;
 }
 
 /**
@@ -94,7 +70,7 @@ function checkAndSetPrio() {
     }
   }
   setUpcomingDeadline();
-  document.getElementById("urgent-task-counter").innerHTML = urgentTaskCounter;
+  document.getElementById("urgent-task-counter").textContent = urgentTaskCounter;
 }
 
 /**
@@ -109,7 +85,7 @@ function setTaskDone() {
       doneTasks++;
     }
   }
-  document.getElementById("done-task-counter").innerHTML = `${doneTasks}`;
+  document.getElementById("done-task-counter").textContent = `${doneTasks}`;
 }
 
 /**
@@ -130,9 +106,9 @@ function setUpcomingDeadline() {
   let currentYear = nextDeadlineAsString.slice(0, 4);
   let container = document.getElementById("urgent-date-container");
   if (monthNameAsString == undefined) {
-    container.innerHTML = ``;
+    container.textContent = "";
   } else {
-    container.innerHTML = `${monthNameAsString} ${currentDay}, ${currentYear} `;
+    container.textContent = `${monthNameAsString} ${currentDay}, ${currentYear} `;
   }
 }
 
@@ -148,7 +124,7 @@ function setTasksInBoard() {
       tasksInBoard++;
     }
   }
-  document.getElementById("tasks-in-board").innerHTML = `${tasksInBoard}`;
+  document.getElementById("tasks-in-board").textContent = `${tasksInBoard}`;
 }
 
 /**
@@ -163,7 +139,7 @@ function setTaskInProgress() {
       tasksInProgress++;
     }
   }
-  document.getElementById("tasks-in-progress").innerHTML = `${tasksInProgress}`;
+  document.getElementById("tasks-in-progress").textContent = `${tasksInProgress}`;
 }
 
 /**
@@ -178,36 +154,15 @@ function setTaskAwaitingFeedback() {
       tasksInAwaitingFeedback++;
     }
   }
-  document.getElementById("tasks-await-feedback").innerHTML = `${tasksInAwaitingFeedback}`;
+  document.getElementById("tasks-await-feedback").textContent = `${tasksInAwaitingFeedback}`;
 }
 
 /**
  * Sets the current name of the user to the greeting message
  */
 async function getUserNameForGreeting() {
-  let currentUserEmail = localStorage.getItem("email");
-  await getData("users");
-  //console.log(currentUserEmail);
-  for (let i = 0; i < users.length; i++) {
-    const user = users[i];
-    if (currentUserEmail === user["email"]) {
-      document.getElementById("greeting-name").innerHTML = user["name"];
-      localStorage.setItem("name", user["name"]);
-    }
-  }
-}
-
-/**
- *
- * @param {string} key - They key here ist 'users'
- * Getting all userdatas
- */
-
-async function getData(key) {
-  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-  let response = await fetch(url);
-  let json = await response.json();
-  users = JSON.parse(json.data.value);
+  document.getElementById("greeting-name").textContent = "Guest";
+  localStorage.setItem("name", "Guest");
 }
 
 /**
@@ -217,12 +172,12 @@ async function getData(key) {
 function setGreetFormula() {
   let container = document.getElementById("greeting-formula");
   if (hour >= 18 && hour >= 0) {
-    container.innerHTML = "Good evening,";
+    container.textContent = "Good evening,";
   } else if (hour >= 12 && hour <= 18) {
-    container.innerHTML = "Good afternoon,";
+    container.textContent = "Good afternoon,";
   } else if (hour >= 6 && hour <= 12) {
-    container.innerHTML = "Good morning,";
+    container.textContent = "Good morning,";
   } else if (hour >= 0 && hour <= 6) {
-    container.innerHTML = "Good night,";
+    container.textContent = "Good night,";
   }
 }

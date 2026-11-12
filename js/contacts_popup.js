@@ -193,9 +193,9 @@ function innerEditContactPopUp(id) {
  */
 function innerEditContactValues(contact) {
   const profile = document.getElementById("contact-profile-container");
-  profile.innerHTML = `<div class="contact-profile-container" style="background-color: ${
+  profile.innerHTML = `<div class="contact-profile-container" style="background-color: ${getSafeContactColor(
     contact.color
-  }">${getInitials(contact.name)}</div>`;
+  )}">${escapeHTML(getInitials(contact.name))}</div>`;
   const inputs = getContactInputs();
   inputs.name.value = contact.name;
   inputs.email.value = contact.email;

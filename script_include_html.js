@@ -37,8 +37,14 @@ function setUserInitials() {
   if(name){
     let initials = name.slice(0, 2);
     let uppercaseInitials = initials.toUpperCase();
-    document.querySelector("[id='initials-user']").innerHTML = `${uppercaseInitials}`; // Dekstop Navbar
-    document.querySelector("[id='initial-user-mobile']").innerHTML = `${uppercaseInitials}`; // Mobile Navbar
+    const desktopInitials = document.getElementById("initials-user");
+    const mobileInitials = document.getElementById("initial-user-mobile");
+    if (desktopInitials) {
+      desktopInitials.textContent = uppercaseInitials;
+    }
+    if (mobileInitials) {
+      mobileInitials.textContent = uppercaseInitials;
+    }
   }
 }
 

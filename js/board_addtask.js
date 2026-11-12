@@ -75,7 +75,14 @@ function innerPopUpContactPlus(rest, container){
  * Give the Date Picker the min Value
  */
 document.addEventListener("DOMContentLoaded", function () {
-  const today = new Date();
-  const formattedDate = today.toISOString().split("T")[0];
-  document.getElementById("task-date-input").min = formattedDate;
+  const dateInput = document.getElementById("task-date-input");
+  function updateMinimumDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    dateInput.min = `${year}-${month}-${day}`;
+  }
+  updateMinimumDate();
+  dateInput.addEventListener("focus", updateMinimumDate);
 });

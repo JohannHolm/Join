@@ -66,7 +66,7 @@ function categoryColorPopUp(category) {
  * @param {Array} task - The Array from the clicked Task
  */
 function getTaskPopUpHTML(htmlid, task) {
-  document.getElementById(`popup-${htmlid}`).innerHTML = task;
+  document.getElementById(`popup-${htmlid}`).textContent = task;
 }
 /**
  * Check status + Register if a subtask is Ready ore not
@@ -74,7 +74,7 @@ function getTaskPopUpHTML(htmlid, task) {
  */
 function checkStatusSubtask(i, idTask) {
   const checkbox = document.getElementById(`popup-checkbox${i}`);
-  const subtaskvalue = document.getElementById(`popup-subtask${i}`).innerHTML;
+  const subtaskvalue = document.getElementById(`popup-subtask${i}`).textContent;
   if (checkbox.checked) {
     updateCheckedSubtask(subtaskvalue, idTask, "checked");
   } else {
@@ -124,8 +124,8 @@ async function getTaskPopUpSubtask(subtaskArray, idTask) {
     const isChecked = currentTaskReadySubtasks.includes(subtaskArray[i])
       ? "checked"
       : "";
-    subtakscon.innerHTML += `<div><input id="popup-checkbox${i}" type="checkbox" ${isChecked} onclick="checkStatusSubtask(${i}, ${idTask})" placeholder="subtask"><label
-      class="popup-subtask" id="popup-subtask${i}" for="popup-checkbox">${subtaskArray[i]}</label></div>`;
+    subtakscon.innerHTML += `<div><input id="popup-checkbox${i}" type="checkbox" ${isChecked} onclick="checkStatusSubtask(${i}, ${getSafeNumericId(idTask)})" placeholder="subtask"><label
+      class="popup-subtask" id="popup-subtask${i}" for="popup-checkbox">${escapeHTML(subtaskArray[i])}</label></div>`;
   }
 }
 
@@ -287,7 +287,7 @@ function deleteEditSubtask(id) {
  */
 function renderEditSubtasks() {
   for (let i = 0; i < subtaskEdit.length; i++) {
-    elementid.subtasks.innerHTML += `<div class="edit-subtask-con"><li>${subtaskEdit[i]}</li><img src="./assets/img/deletepopup.png" alt="delete" onclick="deleteEditSubtask(${i})"></div>`;
+    elementid.subtasks.innerHTML += `<div class="edit-subtask-con"><li>${escapeHTML(subtaskEdit[i])}</li><img src="./assets/img/deletepopup.png" alt="delete" onclick="deleteEditSubtask(${i})"></div>`;
   }
 }
 
@@ -346,10 +346,15 @@ function openTaskPopUp() {
  * @param {*} task - The Priority from the Task
  */
 function getTaskPopUpPrioHTML(htmlid, task) {
-  document.getElementById(
-    `popup-${htmlid}`
-  ).innerHTML = `${task} <img class="popup-prio-img" id="popup-prio-img" src="./assets/img/prio${task}.png"
-    alt="priority">`;
+  const priority = ["urgent", "medium", "low"].includes(task) ? task : "low";
+  const container = document.getElementById(`popup-${htmlid}`);
+  container.textContent = `${priority} `;
+  const image = document.createElement("img");
+  image.className = "popup-prio-img";
+  image.id = "popup-prio-img";
+  image.src = `./assets/img/prio${priority}.png`;
+  image.alt = "priority";
+  container.appendChild(image);
 }
 
 /**
@@ -432,11 +437,11 @@ async function innerContactNameIPopUpHTML(container, currentcontact) {
   const bgColor = await contactBackgroundColor(currentcontact);
   container.innerHTML += `
   <div class="popup-contact-container">
-    <div id="open-card-contact-initials" class="profile" id="popup-profile"style="background-color: ${bgColor}">${setContactInitial(
+    <div id="open-card-contact-initials" class="profile" id="popup-profile"style="background-color: ${getSafeContactColor(bgColor)}">${escapeHTML(setContactInitial(
     currentcontact
-  )}
+  ))}
     </div>
-    <div id="open-card-contact" class="popup-contact-name">${currentcontact}</div>
+    <div id="open-card-contact" class="popup-contact-name">${escapeHTML(currentcontact)}</div>
   </div>`;
 }
 

@@ -15,6 +15,7 @@
   <script src="script_include_html.js"></script>
   <link rel="stylesheet" href="template.css" />
   <link rel="stylesheet" href="./styles/addtask.css" />
+  <script src="./js/storage.js"></script>
   <script src="script.js"></script>
   <script src="./js/board_addtask.js"></script>
   <script src="./js/board_addtask_html.js"></script>
@@ -57,11 +58,11 @@
       <div class="add-task-right-side">
         <div class="add-task-card">
           <div class="form-group">
-            <label for="bootstrap-datepicker">Due date
+            <label for="task-date-input">Due date
               <span class="required-field"></span>
             </label>
             <input class="form-control add-task-inputs" type="date" id="task-date-input" placeholder="dd/mm/yyyy"
-              max="2025-12-31" required />
+              required />
           </div>
           <div class="form-group">
             <label for="prio">Prio</label>

@@ -1,16 +1,5 @@
 /* Board Script // ADD TASK */
 /**
- * The token used for accessing the remote storage.
- * @constant {string}
- */
-const STORAGE_TOKEN = "0BPXH9KOB3KK14LPEUWH02NBW7QT7YIO3LQDS7R4";
-/**
- * The URL used for accessing the remote storage API
- * @constant {String}
- */
-const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
-
-/**
  * The priority level for the task. Default to 'unset'.
  * @type {string}
  */
@@ -22,7 +11,7 @@ let taskcon = getTaskon();
 let statusPopUp = "open";
 
 /**
- * Creates a task using input values from the DOM, then saves it to the remote storage.
+ * Creates a task using input values from the DOM, then saves it in this browser.
  * @async
  * @returns {Promise<void>}
  */
@@ -60,7 +49,7 @@ async function createTask() {
  * @returns - the selected taskcon out the localStorage
  */
 function getTaskon() {
-  return localStorage.getItem("selctTaskCon");
+  return localStorage.getItem("selctTaskCon") || "todo";
 }
 
 /**
@@ -72,20 +61,6 @@ function setTaskcon(con) {
 }
 
 /**
- * Saves an item to remote storage.
- * @async
- * @param {string} key - Key to store the item under.
- * @param {*} value - Value to store.
- * @returns {Promise<void>}
- */
-async function setItem(key, value) {
-  const payload = { key, value, token: STORAGE_TOKEN };
-  await fetch(STORAGE_URL, {
-    method: "POST",
-    body: JSON.stringify(payload),
-  }).then((res) => res.json());
-}
-
 /**
  * Sets up the boards for task management.
  */
@@ -224,26 +199,6 @@ function inputEmptyHTML(id) {
 }
 
 /**
- * Retrieves an item from the remote storage.
- * @async
- * @param {string} key - The key of the item to retrieve.
- * @returns {Promise<*>} - The retrieved value.
- * @throws {Error} Throws an error if the HTTP request fails.
- */
-async function getItem(key) {
-  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-  const response = await fetch(url);
-  if (response.status === 404) {
-    return [];
-  }
-  if (!response.ok) {
-    console.error(response.status);
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  const data = await response.json();
-  return JSON.parse(data.data.value);
-}
-
 /**
  * Sets the priority level based on the provided string.
  * @param {string} prio - The priority level string. Expected values: "urgent", "medium", "low".
@@ -561,7 +516,7 @@ async function setContactsToAssign() {
     const contact = data[i]["name"];
     document.getElementById(
       "assigned_contact"
-    ).innerHTML += `<label><input type="checkbox" value="${contact}"> ${contact}</label>`;
+    ).innerHTML += `<label><input type="checkbox" value="${escapeHTML(contact)}"> ${escapeHTML(contact)}</label>`;
   }
 }
 
@@ -589,7 +544,7 @@ async function contactBackgroundColor(currentcontact) {
     (contact) => contact.name === currentcontact
   );
   if (foundContact) {
-    return foundContact.color;
+    return getSafeContactColor(foundContact.color);
   }
 }
 

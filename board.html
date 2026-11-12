@@ -15,6 +15,7 @@
     <link rel="icon" href="./assets/img/join-logo.png">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="script_include_html.js"></script>
+    <script src="./js/storage.js"></script>
     <script src="script.js"></script>
     <script src="./js/board_popup.js"></script>
     <script src="./js/board_drag_and_drop.js"></script>
@@ -55,7 +56,7 @@
             <div class="desktop-board-todo">
                 <div class="todo-head">
                     <div class="board-head-text">To do</div>
-                    <div class="board-plus" id="board" onclick="setTaskcon('todo')" href="add_task.html">+</div>
+                    <a class="board-plus" id="board" onclick="setTaskcon('todo')" href="add_task.html">+</a>
                 </div>
                 <div class="desktop-todo" id="desktop-todo" ondrop="moveTo('todo')">
                 </div>
@@ -145,7 +146,7 @@
                 <div class="edit-title">
                     <div class="edit-text">Due Date</div>
                     <input class="form-control" type="date" id="task-date-input" placeholder="dd/mm/yyyy"
-                        min="2023-01-01" max="2025-12-31" required />
+                        required />
                 </div>
                 <div class="edit-title">
                     <div class="edit-text">Priority</div>
